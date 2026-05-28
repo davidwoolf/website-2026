@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { T, useTask, useThrelte } from '@threlte/core';
+	import { PerspectiveCamera, Vector3 } from 'three';
 	import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 	import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 	import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
@@ -12,6 +13,10 @@
 	const latRes = 128;
 	const lonRes = 64;
 	const TAU = Math.PI * 2;
+
+	const groupPosition: [number, number, number] = [-3, -1.2, -4.25];
+	const groupScale: [number, number, number] = [0.4, 0.4, 0.01];
+	const groupWorldPos = new Vector3(...groupPosition);
 
 	const vertCount = latRings * latRes * 2 + lonRings * lonRes * 2;
 	const positions = new Float32Array(vertCount * 3);
@@ -64,16 +69,9 @@
 
 	const lineMesh = new LineSegments2(lineGeom, lineMaterial);
 
-	const fovDeg = 50;
-	const cameraDist = 11;
-	const visibleHeight = 2 * cameraDist * Math.tan((fovDeg * Math.PI) / 360);
 	const outerSamples = 256;
 
-	function buildOuterPositions(vpHeight: number) {
-		const gapPx = 4;
-		const halfLineWidth = 1.5;
-		const offsetPx = gapPx + halfLineWidth;
-		const d = (offsetPx * visibleHeight) / vpHeight;
+	function buildOuterPositions(localGap: number) {
 		const positions = new Float32Array((outerSamples + 1) * 3);
 		const a = 1;
 		const b = eb;
@@ -82,15 +80,15 @@
 			const cosT = Math.cos(t);
 			const sinT = Math.sin(t);
 			const N = Math.sqrt(b * b * cosT * cosT + a * a * sinT * sinT);
-			positions[s * 3] = a * cosT + (d * b * cosT) / N;
-			positions[s * 3 + 1] = b * sinT + (d * a * sinT) / N;
+			positions[s * 3] = a * cosT + (localGap * b * cosT) / N;
+			positions[s * 3 + 1] = b * sinT + (localGap * a * sinT) / N;
 			positions[s * 3 + 2] = 0;
 		}
 		return positions;
 	}
 
 	const outerGeom = new LineGeometry();
-	outerGeom.setPositions(buildOuterPositions(800));
+	outerGeom.setPositions(buildOuterPositions(0.05));
 
 	const innerOutlineSamples = 256;
 	const innerOutlinePositions = new Float32Array((innerOutlineSamples + 1) * 3);
@@ -106,7 +104,7 @@
 
 	const innerOutlineMaterial = new LineMaterial({
 		color: 0xfed243,
-		linewidth: 1.5,
+		linewidth: 0.5,
 		toneMapped: false
 	});
 
@@ -114,18 +112,27 @@
 
 	const outerMaterial = new LineMaterial({
 		color: 0xfed243,
-		linewidth: 3,
+		linewidth: 1,
 		toneMapped: false
 	});
 
 	const outerMesh = new Line2(outerGeom, outerMaterial);
 
-	const { size } = useThrelte();
+	const { size, camera } = useThrelte();
+
 	$effect(() => {
+		const cam = $camera;
+		const fovDeg = cam instanceof PerspectiveCamera ? cam.fov : 50;
+		const dist = cam.position.distanceTo(groupWorldPos);
+		const visibleHeight = 2 * dist * Math.tan((fovDeg * Math.PI) / 360);
+		const offsetPx = 1 + 1.5; // gap + half line width
+		// outline lives inside the scaled group, so undo the group's xy scale
+		const localGap = (offsetPx * visibleHeight) / $size.height / groupScale[0];
+
 		lineMaterial.resolution.set($size.width, $size.height);
 		outerMaterial.resolution.set($size.width, $size.height);
 		innerOutlineMaterial.resolution.set($size.width, $size.height);
-		outerGeom.setPositions(buildOuterPositions($size.height));
+		outerGeom.setPositions(buildOuterPositions(localGap));
 	});
 
 	let phi = 0;
@@ -136,21 +143,19 @@
 	});
 </script>
 
-<T.PerspectiveCamera makeDefault position={[0, 0, 11]} />
+<T.Group position={groupPosition} scale={groupScale}>
+	<T.Mesh scale={[1, 0.5, 1]}>
+		<T.SphereGeometry args={[1, 32, 32]} />
+		<T.MeshBasicMaterial
+			color="black"
+			toneMapped={false}
+			polygonOffset
+			polygonOffsetFactor={1}
+			polygonOffsetUnits={1}
+		/>
+	</T.Mesh>
 
-<T.Mesh scale={[1, 0.5, 1]}>
-	<T.SphereGeometry args={[1, 32, 32]} />
-	<T.MeshBasicMaterial
-		color="black"
-		toneMapped={false}
-		polygonOffset
-		polygonOffsetFactor={1}
-		polygonOffsetUnits={1}
-	/>
-</T.Mesh>
-
-<T is={lineMesh} />
-
-<T is={innerOutlineMesh} />
-
-<T is={outerMesh} />
+	<T is={lineMesh} />
+	<T is={innerOutlineMesh} />
+	<T is={outerMesh} />
+</T.Group>

@@ -7,7 +7,8 @@
 	let { cameraPosition = [0, -16, 8] as [number, number, number], fov = 50 } = $props();
 
 	let prefersDark = $state(
-		typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+		true
+		// typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
 	);
 
 	const meshColor = $derived(prefersDark ? '#141414' : '#F4F2F1');
