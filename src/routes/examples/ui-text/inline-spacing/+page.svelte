@@ -6,25 +6,25 @@
 <Tabs>
   <div slot="preview" class="tab__preview">
     <div class="word-spacing-container">
-      <div class="box" />
-      <div class="box" />
-      <div class="box" />
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
     </div>
 
     <p>the boxes are inline block and the parent has word spacing set to 1rem</p>
 
     <div class="letter-spacing-container">
-      <div class="box" />
-      <div class="box" />
-      <div class="box" />
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
     </div>
 
     <p>the boxes are inline block and the parent has letter spacing set to 1rem</p>
 
     <div class="line-height-container">
-      <div class="box" />
-      <div class="box" />
-      <div class="box" />
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
     </div>
 
     <p>the boxes are inline block and the parent has the line height set to 3rem</p>
@@ -34,25 +34,25 @@
     <Code
       language="html"
       code={`<div class="word-spacing-container">
-  <div class="box" />
-  <div class="box" />
-  <div class="box" />
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 
 <p>the boxes are inline block and the parent has word spacing set to 1rem</p>
 
 <div class="letter-spacing-container">
-  <div class="box" />
-  <div class="box" />
-  <div class="box" />
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 
 <p>the boxes are inline block and the parent has letter spacing set to 1rem</p>
 
 <div class="line-height-container">
-  <div class="box" />
-  <div class="box" />
-  <div class="box" />
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 
 <p>the boxes are inline block and the parent has the line height set to 3rem</p>`} />

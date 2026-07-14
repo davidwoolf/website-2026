@@ -17,7 +17,7 @@
 
     <div {...$portalled} use:portalled>
       {#if $open}
-        <div {...$overlay} use:overlay class="overlay" />
+        <div {...$overlay} use:overlay class="overlay"></div>
         <div {...$content} use:content class="content">
           <button {...$close} use:close class="close-dialog" aria-label="close dialog">
             <svg

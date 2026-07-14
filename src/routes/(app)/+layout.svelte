@@ -7,13 +7,14 @@
 
 <header>
 	<div>
-		<h1>David Woolf</h1>
+		<h1><a href={resolve('/')}>David Woolf</a></h1>
 		<p>Design engineer</p>
 	</div>
 
 	<nav>
-		<a href={resolve('/work/tempest')} class:active={(page.route.id ?? '').startsWith('/(app)/work')}
-			>Work</a
+		<a
+			href={resolve('/work/tempest')}
+			class:active={(page.route.id ?? '').startsWith('/(app)/work')}>Work</a
 		>
 		<a href={resolve('/articles')}>Notes</a>
 	</nav>
@@ -51,7 +52,8 @@
 			line-height: 125%;
 		}
 
-		h1 {
+		h1,
+		h1 a {
 			color: var(--text-bright);
 			line-height: 145%;
 		}

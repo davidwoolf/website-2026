@@ -11,7 +11,7 @@
       </div>
 
       <div class="box square">
-        <div />
+        <div></div>
         <p>1 / 1</p>
       </div>
 
@@ -30,7 +30,7 @@
   </div>
 
   <div class="box square">
-    <div />
+    <div></div>
     <p>1 / 1</p>
   </div>
 

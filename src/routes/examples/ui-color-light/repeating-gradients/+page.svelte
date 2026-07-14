@@ -5,7 +5,7 @@
 
 <Tabs>
   <div slot="preview" class="tab__preview">
-    <div class="repeating-radial-gradient" />
+    <div class="repeating-radial-gradient"></div>
   </div>
 
   <div slot="html" class="tab__code">

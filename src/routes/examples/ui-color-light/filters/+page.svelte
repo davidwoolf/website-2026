@@ -7,43 +7,43 @@
   <div slot="preview" class="tab__preview">
     <div class="filters">
       <div>
-        <div class="blur" />
+        <div class="blur"></div>
         <p>blur</p>
       </div>
       <div>
-        <div class="brightness" />
+        <div class="brightness"></div>
         <p>brightness</p>
       </div>
       <div>
-        <div class="contrast" />
+        <div class="contrast"></div>
         <p>contrast</p>
       </div>
       <div>
-        <div class="drop-shadows" />
+        <div class="drop-shadows"></div>
         <p>drop-shadows</p>
       </div>
       <div>
-        <div class="grayscale" />
+        <div class="grayscale"></div>
         <p>grayscale</p>
       </div>
       <div>
-        <div class="hue-rotate" />
+        <div class="hue-rotate"></div>
         <p>hue-rotate</p>
       </div>
       <div>
-        <div class="invert" />
+        <div class="invert"></div>
         <p>invert</p>
       </div>
       <div>
-        <div class="opacity" />
+        <div class="opacity"></div>
         <p>opacity</p>
       </div>
       <div>
-        <div class="saturate" />
+        <div class="saturate"></div>
         <p>saturate</p>
       </div>
       <div>
-        <div class="sepia" />
+        <div class="sepia"></div>
         <p>sepia</p>
       </div>
     </div>
@@ -52,16 +52,16 @@
   <div slot="html" class="tab__code">
     <Code
       language="html"
-      code={`<div class="blur" />
-<div class="brightness" />
-<div class="contrast" />
-<div class="drop-shadows" />
-<div class="grayscale" />
-<div class="hue-rotate" />
-<div class="invert" />
-<div class="opacity" />
-<div class="saturate" />
-<div class="sepia" />`} />
+      code={`<div class="blur"></div>
+<div class="brightness"></div>
+<div class="contrast"></div>
+<div class="drop-shadows"></div>
+<div class="grayscale"></div>
+<div class="hue-rotate"></div>
+<div class="invert"></div>
+<div class="opacity"></div>
+<div class="saturate"></div>
+<div class="sepia"></div>`} />
   </div>
   <div slot="css" class="tab__code">
     <Code
