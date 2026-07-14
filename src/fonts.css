@@ -1,0 +1,26 @@
+:root {
+  --font-size-1: 1rem;
+  --font-size-4: 1rem;
+  --font-size-5: 1.2rem;
+  --font-size-6: 2.4rem;
+
+  @media (min-width: 640px) {
+    --font-size-1: 1rem;
+    --font-size-4: 1.125rem;
+    --font-size-5: 1.5rem;
+    --font-size-6: 3rem;
+  }
+
+  --font-weight-4: 400;
+  --font-weight-5: 500;
+  --font-weight-6: 600;
+  --font-weight-7: 700;
+
+  --font-lineheight-0: 90%;
+  --font-lineheight-1: 100%;
+  --font-lineheight-2: 115%;
+  --font-lineheight-3: 125%;
+  --font-lineheight-4: 135%;
+  --font-lineheight-5: 145%;
+  --font-lineheight-6: 155%;
+}

@@ -1,15 +1,23 @@
 @import './reset.css';
 @import './colors.css';
+@import './fonts.css';
 @import './sizes.css';
 
 :root {
-	/* @TODO: Import this font */
-	--font-mono: 'Ioveska', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font:
+    'Tasa Orbiter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --layer-1: 10;
+  --layer-2: 20;
+  --layer-3: 30;
+  --layer-4: 40;
+  --layer-5: 50;
 }
 
 body {
-	-webkit-font-smoothing: antialiased;
-	background-color: var(--surface-dark);
-	color: var(--text);
-	font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--surface-dark);
+  color: var(--text);
+  font-family: var(--font);
 }
