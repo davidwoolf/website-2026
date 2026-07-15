@@ -51,7 +51,7 @@
 
 	h1 {
 		color: var(--text-bright);
-		font-size: var(--font-size-5);
+		font-size: var(--font-size-4);
 		font-weight: var(--font-weight-7);
 		line-height: var(--font-lineheight-2);
 	}
@@ -72,7 +72,7 @@
 
 	h2 {
 		color: var(--text-bright);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-3);
 		font-weight: var(--font-weight-6);
 		line-height: var(--font-lineheight-3);
 	}
@@ -83,7 +83,7 @@
 
 	.excerpt {
 		color: var(--text-faded);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-2);
 		line-height: var(--font-lineheight-6);
 		padding-block-start: var(--size-2);
 	}

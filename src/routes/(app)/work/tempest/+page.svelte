@@ -1,8 +1,27 @@
 <script lang="ts">
 	import WorkHeader from '$lib/components/work-header.svelte';
 	import WorkIntro from '$lib/components/work-intro.svelte';
+	import Slider from '$lib/components/slider.svelte';
 	import tables from '$lib/assets/work/tempest/tables.png';
 	import classifications from '$lib/assets/work/tempest/classifications.png';
+	import slide1 from '$lib/assets/work/tempest/slide-1.png';
+	import slide2 from '$lib/assets/work/tempest/slide-2.png';
+	import slide3 from '$lib/assets/work/tempest/slide-3.png';
+
+	const slides = [
+		{
+			src: slide1,
+			alt: 'Tempest Resources catalog listing repositories with their teams, owners, types, projects, and tags'
+		},
+		{
+			src: slide2,
+			alt: 'Tempest Deploy view showing a grid of deployable application cards with icons, details, and owning teams'
+		},
+		{
+			src: slide3,
+			alt: 'Tempest Variables screen for managing environment variables, secrets, and cryptographic assets'
+		}
+	];
 </script>
 
 <div class="wrapper">
@@ -35,7 +54,10 @@
 
 		<section>
 			<WorkIntro>
-				<!-- image slider here -->
+				<div class="intro-media">
+					<Slider {slides} label="Tempest interface highlights" />
+				</div>
+
 				<p>
 					The Tempest Developer Platform helps engineering teams manage their growing catalog of
 					deployed software, while also empowering teams without a dev-ops engineer to deploy code
@@ -108,7 +130,7 @@
 			display: flex;
 			align-items: center;
 			gap: var(--size-4);
-			font-size: var(--font-size-4);
+			font-size: var(--font-size-2);
 			font-weight: var(--font-weight-5);
 			line-height: var(--font-lineheight-6);
 			padding-block: var(--size-12) 0;
@@ -128,7 +150,7 @@
 		}
 
 		p {
-			font-size: var(--font-size-4);
+			font-size: var(--font-size-2);
 			line-height: var(--font-lineheight-6);
 			text-align: center;
 		}
@@ -146,5 +168,9 @@
 			block-size: auto;
 			margin-block: var(--size-8) 0;
 		}
+	}
+
+	.intro-media {
+		margin-block-end: var(--size-8);
 	}
 </style>

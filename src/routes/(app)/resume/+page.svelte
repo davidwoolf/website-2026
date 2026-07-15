@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { assets } from '$app/paths';
+	import { asset } from '$app/paths';
 	import { marked } from 'marked';
 
 	interface Section {
@@ -21,11 +21,11 @@
 	const sections: Section[] = [
 		{
 			company: 'Tempest',
-			position: 'Lead designer and senior front-end engineer',
+			position: 'Senior front-end engineer and lead designer',
 			icon: 'tempest.svg',
-			color: '#171717',
+			color: '#F2F0E8',
 			startDate: 'Feb 2024',
-			endDate: 'Present',
+			endDate: 'June 2026',
 			description: `UI designer and front-end engineer for Friday Studio, an agent orchestration platform competing against OpenClaw and Claude Cowork. Customers range from Fortune 500 to SMB.
 
 Designed and implemented rich, structured output in the Friday Studio realtime chat interface including streaming markdown, calendar schedules, and OAuth login cards.
@@ -106,53 +106,48 @@ Championed adoption of React for new projects, driving larger and more complex e
 	];
 </script>
 
-<div class="resume">
-	<div class="heading heading--screen">
+<div class="wrapper">
+	<div class="resume">
 		<h1>Resume</h1>
-	</div>
 
-	<div class="heading heading--print">
-		<h1>David Woolf</h1>
-	</div>
+		<div>
+			<p>User interface designer and front-end engineer</p>
+			<p class="muted">San Diego, California • woolf.david@gmail.com</p>
+		</div>
 
-	<div>
-		<p class="lead">User interface designer and front-end engineer</p>
-		<p class="muted">
-			San Diego, California • woolf.david@gmail.com <span class="phone">• 319.551.7658</span>
-		</p>
-	</div>
+		{#each sections as section, index (index)}
+			{#if index > 0}
+				<div role="presentation" aria-hidden="true" class="divider"></div>
+			{/if}
+			<article>
+				<div>
+					<div class="company">
+						{#if section.icon}
+							<div class="icon" style:background={section.color}>
+								<img src={asset(`/logos/${section.icon}`)} alt={section.company} />
+							</div>
+						{/if}
+						<h2>{section.company}</h2>
+					</div>
 
-	{#each sections as section, index (index)}
-		{#if index > 0}
-			<div role="presentation" aria-hidden="true" class="divider"></div>
-		{/if}
-		<article>
-			<div>
-				<div class="company">
-					{#if section.icon}
-						<div class="icon" style:background={section.color}>
-							<img src="{assets}/logos/{section.icon}" alt={section.company} />
+					{#if section.position || section.startDate || section.endDate}
+						<div class="role">
+							{#if section.position}
+								<p class="position">{section.position}</p>
+							{/if}
+							{#if section.startDate || section.endDate}
+								<p class="muted">{section.startDate} — {section.endDate}</p>
+							{/if}
 						</div>
 					{/if}
-					<h2>{section.company}</h2>
 				</div>
-				{#if section.position || section.startDate || section.endDate}
-					<div class="role">
-						{#if section.position}
-							<p class="position">{section.position}</p>
-						{/if}
-						{#if section.startDate || section.endDate}
-							<p class="muted">{section.startDate} — {section.endDate}</p>
-						{/if}
-					</div>
-				{/if}
-			</div>
 
-			<div class="section-description">
-				{@html md(section.description)}
-			</div>
-		</article>
-	{/each}
+				<div class="section-description">
+					{@html md(section.description)}
+				</div>
+			</article>
+		{/each}
+	</div>
 </div>
 
 <svelte:head>
@@ -160,40 +155,46 @@ Championed adoption of React for new projects, driving larger and more complex e
 </svelte:head>
 
 <style>
-	.resume {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-8);
-		margin-inline: auto;
-		/* NOTE: original was max-w-5xl (64rem); no size token goes past 48rem
-		   (--size-192), so this is a literal to preserve the two-column width. */
-		max-inline-size: 64rem;
-		padding-block: var(--size-12);
+	.wrapper {
+		padding-block: var(--size-6);
 		padding-inline: var(--size-6);
 
 		@media (min-width: 768px) {
-			column-gap: var(--size-24);
-			display: grid;
+			padding-block: var(--size-12);
+		}
+	}
+
+	.resume {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-column-gap: var(--size-24);
+		grid-row-gap: var(--size-6);
+		max-inline-size: var(--size-240);
+		margin-inline: auto;
+
+		@media (min-width: 768px) {
 			grid-template-columns: 1fr 2fr;
-			padding-inline: var(--size-12);
-			row-gap: var(--size-12);
+			grid-row-gap: var(--size-16);
+		}
+
+		& :global(p) {
+			color: var(--text);
+			font-size: var(--font-size-1);
+			font-weight: var(--font-weight-5);
+			line-height: var(--font-lineheight-4);
+
+			&:global(.muted) {
+				color: var(--text-faded);
+			}
 		}
 	}
 
 	h1 {
 		color: var(--text-bright);
-		font-size: var(--font-size-5);
+		font-size: var(--font-size-4);
 		font-weight: var(--font-weight-7);
-		line-height: var(--font-lineheight-2);
-	}
-
-	.lead {
-		color: var(--text-bright);
-		font-weight: var(--font-weight-5);
-	}
-
-	.muted {
-		color: var(--text-faded);
+		line-height: var(--font-lineheight-0);
+		margin-block-end: calc(-1 * var(--size-4));
 	}
 
 	article {
@@ -210,13 +211,10 @@ Championed adoption of React for new projects, driving larger and more complex e
 
 	.company h2 {
 		color: var(--text-bright);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-2);
 		font-weight: var(--font-weight-6);
 	}
 
-	/* NOTE: chip colors are the source brand hex values, picked for a light
-	   theme. On this dark surface the near-black Tempest chip (#171717) all but
-	   disappears — flagged, not adjusted. */
 	.icon {
 		align-items: center;
 		block-size: var(--size-8);
@@ -238,16 +236,13 @@ Championed adoption of React for new projects, driving larger and more complex e
 	}
 
 	.position {
-		color: var(--text);
+		color: var(--text-bright);
 		font-weight: var(--font-weight-5);
 		line-height: var(--font-lineheight-1);
 		text-wrap: balance;
 	}
 
 	.section-description {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-4);
 		padding-block-start: var(--size-4);
 
 		@media (min-width: 768px) {
@@ -256,10 +251,11 @@ Championed adoption of React for new projects, driving larger and more complex e
 	}
 
 	.section-description :global(p) {
-		color: var(--text);
-		font-size: var(--font-size-4);
 		line-height: var(--font-lineheight-6);
-		margin: 0;
+
+		& :global(+ p) {
+			margin-block-start: var(--size-4);
+		}
 	}
 
 	.section-description :global(strong) {
@@ -281,26 +277,10 @@ Championed adoption of React for new projects, driving larger and more complex e
 		grid-column: 1 / -1;
 	}
 
-	/* Print: swap the "Resume" title for the name, reveal the phone number, and
-	   drop the on-screen chrome (icons + dividers). */
-	.heading--print,
-	.phone {
-		display: none;
-	}
-
 	@media print {
-		.heading--screen,
 		.divider,
 		.icon {
 			display: none;
-		}
-
-		.heading--print {
-			display: block;
-		}
-
-		.phone {
-			display: inline;
 		}
 	}
 </style>

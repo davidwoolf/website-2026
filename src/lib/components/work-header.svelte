@@ -37,7 +37,7 @@
 
 		:global(h1) {
 			color: var(--text-bright);
-			font-size: var(--font-size-6);
+			font-size: var(--font-size-4);
 			font-weight: var(--font-weight-7);
 			line-height: var(--font-lineheight-0);
 			margin-inline-start: calc(-1 * var(--size-6));
@@ -46,7 +46,7 @@
 
 	p {
 		color: var(--text-faded);
-		font-size: var(--font-size-5);
+		font-size: var(--font-size-3);
 		font-weight: var(--font-weight-5);
 		inline-size: max-content;
 		line-height: var(--font-lineheight-2);

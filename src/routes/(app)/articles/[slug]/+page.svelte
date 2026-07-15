@@ -50,15 +50,16 @@
 	   Tailwind scale. Levels are differentiated with weight + spacing. */
 	.post :global(h1) {
 		color: var(--text-bright);
-		font-size: var(--font-size-5);
+		font-size: var(--font-size-4);
 		font-weight: var(--font-weight-7);
 		line-height: var(--font-lineheight-2);
 		margin: 0;
+		text-wrap-style: balance;
 	}
 
 	.post :global(h2) {
 		color: var(--text-bright);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-3);
 		font-weight: var(--font-weight-6);
 		line-height: var(--font-lineheight-3);
 		margin: 0;
@@ -67,7 +68,7 @@
 
 	.post :global(h3) {
 		color: var(--text-bright);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-2);
 		font-weight: var(--font-weight-6);
 		margin: 0;
 		padding-block-start: var(--size-6);
@@ -75,7 +76,7 @@
 
 	.post :global(h4) {
 		color: var(--text-bright);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-2);
 		font-weight: var(--font-weight-6);
 		margin-block-end: calc(-1 * var(--size-3));
 		margin-block-start: 0;
@@ -86,7 +87,7 @@
 	.post :global(p),
 	.post :global(li) {
 		color: var(--text);
-		font-size: var(--font-size-4);
+		font-size: var(--font-size-2);
 		line-height: var(--font-lineheight-6);
 		margin: 0;
 	}
@@ -123,7 +124,7 @@
 	}
 
 	.post :global(a:hover) {
-		color: var(--green-primary);
+		color: var(--yellow-primary);
 		text-decoration: none;
 	}
 
@@ -228,7 +229,7 @@
 
 	/* ── References ───────────────────────────────────────────────────── */
 	.references {
-		font-size: 0.875rem;
+		font-size: var(--text-1);
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -236,7 +237,7 @@
 
 	.references a {
 		color: var(--text);
-		opacity: 0.8;
+
 		word-break: break-all;
 	}
 

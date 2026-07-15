@@ -8,6 +8,8 @@
     'Tasa Orbiter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 
+  --radius-1: .625rem;
+
   --layer-1: 10;
   --layer-2: 20;
   --layer-3: 30;
