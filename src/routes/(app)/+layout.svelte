@@ -16,7 +16,10 @@
 			href={resolve('/work/tempest')}
 			class:active={(page.route.id ?? '').startsWith('/(app)/work')}>Work</a
 		>
-		<a href={resolve('/articles')}>Notes</a>
+		<a
+			href={resolve('/articles')}
+			class:active={(page.route.id ?? '').startsWith('/(app)/articles')}>Notes</a
+		>
 	</nav>
 </header>
 

@@ -11,6 +11,10 @@
 
 <div class="description"></div>
 
+<svelte:head>
+	<title>David Woolf – Design Engineer</title>
+</svelte:head>
+
 <style>
 	.room {
 		position: relative;

@@ -114,6 +114,10 @@
 	</article>
 </div>
 
+<svelte:head>
+	<title>Tempest Case Study — David Woolf</title>
+</svelte:head>
+
 <style>
 	.wrapper {
 		padding-inline: var(--size-6);
