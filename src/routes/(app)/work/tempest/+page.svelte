@@ -4,21 +4,31 @@
 	import Slider from '$lib/components/slider.svelte';
 	import tables from '$lib/assets/work/tempest/tables.png';
 	import classifications from '$lib/assets/work/tempest/classifications.png';
-	import slide1 from '$lib/assets/work/tempest/slide-1.png';
-	import slide2 from '$lib/assets/work/tempest/slide-2.png';
-	import slide3 from '$lib/assets/work/tempest/slide-3.png';
+	import recipe from '$lib/assets/work/tempest/recipe.png';
+	import catalog from '$lib/assets/work/tempest/catalog.png';
+	import project from '$lib/assets/work/tempest/project.png';
+	import resources from '$lib/assets/work/tempest/resources.png';
+	import variables from '$lib/assets/work/tempest/variables.png';
 
 	const slides = [
 		{
-			src: slide1,
-			alt: 'Tempest Resources catalog listing repositories with their teams, owners, types, projects, and tags'
+			src: recipe,
+			alt: 'Tempest Recipes planner for the Marketing Website recipe, arranging global resources and deployment environments'
 		},
 		{
-			src: slide2,
+			src: catalog,
 			alt: 'Tempest Deploy view showing a grid of deployable application cards with icons, details, and owning teams'
 		},
 		{
-			src: slide3,
+			src: project,
+			alt: 'Tempest project Deployments view listing recent deployments with their authors, branches, environments, and status'
+		},
+		{
+			src: resources,
+			alt: 'Tempest Resources catalog listing repositories with their teams, owners, types, projects, and tags'
+		},
+		{
+			src: variables,
 			alt: 'Tempest Variables screen for managing environment variables, secrets, and cryptographic assets'
 		}
 	];
