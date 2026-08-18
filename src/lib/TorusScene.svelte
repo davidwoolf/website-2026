@@ -3,16 +3,19 @@
 	import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
 	import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
 	import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+	import { untrack } from 'svelte';
 
-	let { cameraPosition = [0, -16, 8] as [number, number, number], fov = 50 } = $props();
+	let {
+		cameraPosition = [0, -16, 8] as [number, number, number],
+		// on-screen width of the torus, in CSS pixels — the fov is derived from it
+		torusWidth = 120,
+		// --surface
+		color = '#F7F4F3',
+		// --text
+		backgroundColor = '#181C2F'
+	} = $props();
 
-	let prefersDark = $state(
-		true
-		// typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-	);
-
-	const meshColor = $derived(prefersDark ? '#141414' : '#F4F2F1');
-	const lineColorHex = $derived(prefersDark ? 0xf2f0e8 : 0x141414);
+	const { size } = useThrelte();
 
 	const R = 1;
 	const r = 0.6;
@@ -21,6 +24,19 @@
 	const majorRes = 128;
 	const tubeRes = 64;
 	const TAU = Math.PI * 2;
+
+	// widest projected dimension of the torus, in world units
+	const torusWorldWidth = 2 * (R + r);
+	const cameraDistance = $derived(Math.hypot(...cameraPosition));
+
+	// vertical fov that renders `torusWorldWidth` as `torusWidth` CSS pixels:
+	// the camera frames a viewport of (torusWorldWidth * height / torusWidth)
+	// world units tall, since three derives the horizontal fov from the aspect
+	const fov = $derived(
+		2 *
+			Math.atan((torusWorldWidth * $size.height) / torusWidth / (2 * cameraDistance)) *
+			(180 / Math.PI)
+	);
 
 	const vertCount = majorRings * majorRes * 2 + tubeRings * tubeRes * 2;
 	const positions = new Float32Array(vertCount * 3);
@@ -68,29 +84,19 @@
 	const instanceBuffer = lineGeom.attributes.instanceStart.data;
 
 	const lineMaterial = new LineMaterial({
-		color: lineColorHex,
+		color: untrack(() => color),
 		linewidth: 1,
 		toneMapped: false
 	});
 
 	const lineMesh = new LineSegments2(lineGeom, lineMaterial);
 
-	const { size } = useThrelte();
 	$effect(() => {
 		lineMaterial.resolution.set($size.width, $size.height);
 	});
 
 	$effect(() => {
-		lineMaterial.color.set(lineColorHex);
-	});
-
-	$effect(() => {
-		const mq = window.matchMedia('(prefers-color-scheme: dark)');
-		const onChange = (e: MediaQueryListEvent) => {
-			prefersDark = e.matches;
-		};
-		mq.addEventListener('change', onChange);
-		return () => mq.removeEventListener('change', onChange);
+		lineMaterial.color.set(color);
 	});
 
 	let majorOffset = 0;
@@ -113,7 +119,7 @@
 <T.Mesh>
 	<T.TorusGeometry args={[1, 0.6, 32, 96]} />
 	<T.MeshBasicMaterial
-		color={meshColor}
+		color={backgroundColor}
 		toneMapped={false}
 		polygonOffset
 		polygonOffsetFactor={1}

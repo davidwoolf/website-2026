@@ -32,7 +32,12 @@
   --size-22: 5.5rem;
   --size-23: 5.75rem;
   --size-24: 6rem;
+  --size-32: 8rem;
+  --size-48: 12rem;
   --size-144: 36rem;
   --size-192: 48rem;
   --size-240: 60rem;
+
+  /* Border radius */
+  --radius-1: .5rem;
 }

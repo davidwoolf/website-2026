@@ -4,9 +4,10 @@
 @import './sizes.css';
 
 :root {
-  --font:
-    'Tasa Orbiter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+  --font-sans:
+    'Libre Franklin', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: 'Libre Baskerville', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
 
   --radius-1: .625rem;
 
@@ -21,5 +22,5 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: var(--surface-dark);
   color: var(--text);
-  font-family: var(--font);
+  font-family: var(--font-sans);
 }

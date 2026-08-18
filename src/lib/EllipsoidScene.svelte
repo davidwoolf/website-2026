@@ -6,6 +6,19 @@
 	import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js';
 	import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js';
 	import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
+	import { untrack } from 'svelte';
+
+	let {
+		color = '#FED243',
+		// fills the ellipsoid so the wireframe on the far side is hidden — match
+		// the surface the scene sits on
+		backgroundColor = 'black',
+		groupPosition = [-3, -1.2, -4.25] as [number, number, number],
+		groupScale = [0.4, 0.4, 0.01] as [number, number, number]
+	} = $props();
+
+	// materials are constructed once; an effect below keeps their color in sync
+	const initialColor = untrack(() => color);
 
 	const eb = 0.5;
 	const latRings = 8;
@@ -14,9 +27,7 @@
 	const lonRes = 64;
 	const TAU = Math.PI * 2;
 
-	const groupPosition: [number, number, number] = [-3, -1.2, -4.25];
-	const groupScale: [number, number, number] = [0.4, 0.4, 0.01];
-	const groupWorldPos = new Vector3(...groupPosition);
+	const groupWorldPos = $derived(new Vector3(...groupPosition));
 
 	const vertCount = latRings * latRes * 2 + lonRings * lonRes * 2;
 	const positions = new Float32Array(vertCount * 3);
@@ -62,7 +73,7 @@
 	const instanceBuffer = lineGeom.attributes.instanceStart.data;
 
 	const lineMaterial = new LineMaterial({
-		color: 0xfed243,
+		color: initialColor,
 		linewidth: 1.5,
 		toneMapped: false
 	});
@@ -103,7 +114,7 @@
 	innerOutlineGeom.setPositions(innerOutlinePositions);
 
 	const innerOutlineMaterial = new LineMaterial({
-		color: 0xfed243,
+		color: initialColor,
 		linewidth: 0.5,
 		toneMapped: false
 	});
@@ -111,7 +122,7 @@
 	const innerOutlineMesh = new Line2(innerOutlineGeom, innerOutlineMaterial);
 
 	const outerMaterial = new LineMaterial({
-		color: 0xfed243,
+		color: initialColor,
 		linewidth: 1,
 		toneMapped: false
 	});
@@ -119,6 +130,12 @@
 	const outerMesh = new Line2(outerGeom, outerMaterial);
 
 	const { size, camera } = useThrelte();
+
+	$effect(() => {
+		lineMaterial.color.set(color);
+		innerOutlineMaterial.color.set(color);
+		outerMaterial.color.set(color);
+	});
 
 	$effect(() => {
 		const cam = $camera;
@@ -147,7 +164,7 @@
 	<T.Mesh scale={[1, 0.5, 1]}>
 		<T.SphereGeometry args={[1, 32, 32]} />
 		<T.MeshBasicMaterial
-			color="black"
+			color={backgroundColor}
 			toneMapped={false}
 			polygonOffset
 			polygonOffsetFactor={1}
