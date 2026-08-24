@@ -49,7 +49,7 @@
   /* Surfaces */
   --surface-dark: var(--black-800);
   --surface: var(--black-800);
-  --surface-bright: var(--black-800);
+  --surface-bright: var(--black-900);
 
   /* Highlights */
   /*--highlight: light-dark(var(--cream-800), var(--grey-200));

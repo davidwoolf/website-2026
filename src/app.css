@@ -4,10 +4,7 @@
 @import './sizes.css';
 
 :root {
-  --font-sans:
-    'Libre Franklin', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: 'Libre Baskerville', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+
 
   --radius-1: .625rem;
 

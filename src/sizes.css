@@ -40,4 +40,5 @@
 
   /* Border radius */
   --radius-1: .5rem;
+  --radius-round: 9999px;
 }

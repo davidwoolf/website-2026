@@ -19,7 +19,7 @@
 
 	const R = 1;
 	const r = 0.6;
-	const majorRings = 12;
+	const majorRings = 18;
 	const tubeRings = 6;
 	const majorRes = 128;
 	const tubeRes = 64;
@@ -85,7 +85,7 @@
 
 	const lineMaterial = new LineMaterial({
 		color: untrack(() => color),
-		linewidth: 1,
+		linewidth: 1.5,
 		toneMapped: false
 	});
 

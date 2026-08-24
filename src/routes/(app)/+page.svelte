@@ -4,6 +4,7 @@
 	import LatLng from '$lib/components/lat-lng.svelte';
 	import TorusScene from '$lib/TorusScene.svelte';
 	import { Canvas, T } from '@threlte/core';
+	import ArticleBlock from '$lib/components/article-block.svelte';
 </script>
 
 <div class="ruler"></div>
@@ -74,20 +75,26 @@
 			</div>
 		</div>
 
-		<div class="block" style:grid-column="1 / span 4" style:grid-row="17 / span 5">article 1</div>
-		<div class="block" style:grid-column="5 / span 4" style:grid-row="12 / span 5">article 2</div>
+		<div style:grid-column="1 / span 4" style:grid-row="17 / span 5">
+			<ArticleBlock slug="anatomy-of-everyday-ui-layout" />
+		</div>
+		<div style:grid-column="5 / span 4" style:grid-row="12 / span 5">
+			<ArticleBlock slug="anatomy-of-everyday-ui-color-light" />
+		</div>
 		<div style:grid-column="7 / span 2" style:grid-row="1 / span 3">
 			<LatLng />
 		</div>
 		<div class="block" style:grid-column="11 / span 3" style:grid-row="1 / span 3">color block</div>
 		<div class="block" style:grid-column="8 / span 4" style:grid-row="6 / span 5">anatomyui</div>
 
-		<div class="block" style:grid-column="15 / span 4" style:grid-row="2 / span 5">article 3</div>
+		<div style:grid-column="15 / span 4" style:grid-row="2 / span 5">
+			<ArticleBlock slug="anatomy-of-everyday-ui-text" />
+		</div>
 		<div class="block" style:grid-column="20 / span 4" style:grid-row="4 / span 5">friday</div>
 		<div class="block" style:grid-column="13 / span 4" style:grid-row="8 / span 8">photos</div>
 		<div style:grid-column="10 / span 2" style:grid-row="14 / span 2">
 			<Canvas>
-				<TorusScene />
+				<TorusScene color="#C7C2C3" backgroundColor="#F7F4F3" />
 			</Canvas>
 		</div>
 		<div class="block" style:grid-column="7 / span 4" style:grid-row="19 / span 5">sunset</div>
