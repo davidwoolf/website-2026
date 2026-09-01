@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
 	import { resolve } from '$app/paths';
+	import Logo from '$lib/components/logo.svelte';
 
 	let { children } = $props();
 </script>
 
 <header>
 	<a href={resolve('/')} class="mark">
-		<img src={asset('/images/logo.svg')} alt="Logo mark" />
+		<span style:color="var(--red-primary)">
+			<Logo />
+		</span>
 
 		<h1>David Woolf</h1>
 		<p>Design engineer</p>
@@ -59,7 +62,8 @@
 			grid-template-rows: auto auto;
 		}
 
-		img {
+		/* :global because Svelte can't scope-class markup injected via {@html} */
+		.mark :global(span) {
 			grid-column: 1;
 			grid-row: 1 / -1;
 		}

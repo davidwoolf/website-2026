@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
-	import EllipsoidScene from '$lib/EllipsoidScene.svelte';
+	import { asset, resolve } from '$app/paths';
 	import LatLng from '$lib/components/lat-lng.svelte';
 	import TorusScene from '$lib/TorusScene.svelte';
-	import { Canvas, T } from '@threlte/core';
+	import { Canvas } from '@threlte/core';
 	import ArticleBlock from '$lib/components/article-block.svelte';
+	import CaseStudy from '$lib/components/case-study.svelte';
+	import Photos from '$lib/components/photos.svelte';
 </script>
 
-<div class="ruler"></div>
-<div class="ruler-2"></div>
+<!-- <div class="ruler"></div>
+<div class="ruler-2"></div> -->
 
 <div class="scroll-container">
 	<div class="canvas">
@@ -49,7 +50,7 @@
 			</p>
 			<p>
 				<strong>This site itself</strong> is an embodiment of what I enjoy: articles to read, work to
-				explore, and interactivity you can discover. Move around, click, read, and remix it!
+				explore, and interactivity you can discover. Move around, click, explore.
 			</p>
 			<p>
 				– David <a href="https://bsky.app/profile/davidwoolf.me" target="_blank">
@@ -63,7 +64,8 @@
 
 		<div class="globe">
 			<div class="inner">
-				<Canvas>
+				<img src={asset('/ellipsoid.png')} alt="Ellipsoid" />
+				<!-- <Canvas>
 					<T.PerspectiveCamera makeDefault position={[0, 0, 3.5]} fov={36} />
 					<EllipsoidScene
 						color="#46B3E9"
@@ -71,7 +73,7 @@
 						groupPosition={[0, 0, 0]}
 						groupScale={[1, 1, 0.01]}
 					/>
-				</Canvas>
+				</Canvas> -->
 			</div>
 		</div>
 
@@ -84,22 +86,43 @@
 		<div style:grid-column="7 / span 2" style:grid-row="1 / span 3">
 			<LatLng />
 		</div>
-		<div class="block" style:grid-column="11 / span 3" style:grid-row="1 / span 3">color block</div>
-		<div class="block" style:grid-column="8 / span 4" style:grid-row="6 / span 5">anatomyui</div>
+		<!-- <div class="block" style:grid-column="11 / span 3" style:grid-row="1 / span 3">color block</div> -->
+		<div class="case-study" style:grid-column="8 / span 4" style:grid-row="5 / span 6">
+			<CaseStudy
+				href="https://anatomyui.com"
+				title="Anatomy UI"
+				description="Gain deeper knowledge to making interfaces for the web"
+				action="View project"
+				highlight="#7916CA"
+			/>
+		</div>
 
 		<div style:grid-column="15 / span 4" style:grid-row="2 / span 5">
 			<ArticleBlock slug="anatomy-of-everyday-ui-text" />
 		</div>
-		<div class="block" style:grid-column="20 / span 4" style:grid-row="4 / span 5">friday</div>
-		<div class="block" style:grid-column="13 / span 4" style:grid-row="8 / span 8">photos</div>
+		<!-- <div class="block" style:grid-column="20 / span 4" style:grid-row="4 / span 5">friday</div> -->
+		<div style:grid-column="13 / span 4" style:grid-row="8 / span 8">
+			<Photos />
+		</div>
 		<div style:grid-column="10 / span 2" style:grid-row="14 / span 2">
 			<Canvas>
 				<TorusScene color="#C7C2C3" backgroundColor="#F7F4F3" />
 			</Canvas>
 		</div>
-		<div class="block" style:grid-column="7 / span 4" style:grid-row="19 / span 5">sunset</div>
-		<div class="block" style:grid-column="12 / span 2" style:grid-row="20 / span 3">eye</div>
-		<div class="block" style:grid-column="15 / span 4" style:grid-row="18 / span 5">tempest</div>
+		<!-- <div class="block" style:grid-column="7 / span 4" style:grid-row="19 / span 5">sunset</div> -->
+		<div class="eyeball" style:grid-column="12 / span 2" style:grid-row="20 / span 3">
+			<img src={asset('/eyeball.png')} alt="Eyeball" />
+		</div>
+
+		<div class="case-study" style:grid-column="15 / span 4" style:grid-row="18 / span 5">
+			<CaseStudy
+				href={resolve('/work/tempest')}
+				title="Tempest"
+				description="Software orchestration for large engineering teams"
+				action="Read case study"
+				highlight="#163BCA"
+			/>
+		</div>
 	</div>
 </div>
 
@@ -115,17 +138,24 @@
 	}
 
 	.canvas {
-		display: grid;
-		block-size: max-content;
-		inline-size: max-content;
-		overflow: visible;
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-8);
 		grid-template-columns: repeat(24, var(--size-24));
 		grid-template-rows: repeat(29, var(--size-12));
 		padding-block-start: var(--size-32);
-		padding-inline-start: var(--size-12);
+		padding-inline: var(--size-12);
+
+		@media (min-width: 768px) {
+			display: grid;
+			gap: 0;
+			block-size: max-content;
+			inline-size: max-content;
+			overflow: visible;
+		}
 
 		@media (min-width: 1024px) {
-			padding-inline-start: var(--size-48);
+			padding-inline: var(--size-48) 0;
 		}
 	}
 
@@ -191,15 +221,36 @@
 		grid-row: 12 / span 3;
 
 		.inner {
+			align-items: center;
 			block-size: 100%;
+			display: flex;
 			inline-size: 100%;
+			justify-content: center;
+		}
+
+		img {
+			max-inline-size: 144px;
 		}
 	}
 
-	.block {
+	/*.block {
 		align-items: center;
 		background-color: white;
 		display: flex;
 		justify-content: center;
+	}*/
+
+	.eyeball {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		img {
+			max-inline-size: 100px;
+		}
+	}
+
+	.case-study {
+		display: flex;
+		align-items: center;
 	}
 </style>

@@ -4,9 +4,11 @@
 @import './sizes.css';
 
 :root {
-
-
   --radius-1: .625rem;
+  --radius-2: 1rem;
+  --radius-3: 1.25rem;
+
+  --shadow-1: 0 44px 24px -40px rgb(0 0 0 / 0.10);
 
   --layer-1: 10;
   --layer-2: 20;
