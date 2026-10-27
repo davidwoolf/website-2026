@@ -1,0 +1,25 @@
+:root {
+  color-scheme: light;
+
+  --black-1: rgb(24 28 47);
+
+  @media (color-gamut: p3) {
+    --black-1: color(display-p3 0.0941 0.1098 0.1843);
+  }
+
+  --label-1: var(--black-1);
+  --label-2: color(from var(--black-1) srgb r g b / 0.8);
+  --label-3: color(from var(--black-1) srgb r g b / 0.6);
+
+  --shadow-1:
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 3px -1px rgba(0, 0, 0, 0.08),
+    0 3px 12px -4px rgba(0, 0, 0, 0.08), 0 4px 16px -8px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  @media (color-gamut: p3) {
+    --shadow-1:
+      0 0 0 1px color(display-p3 0 0 0 / 0.03), 0 2px 3px -1px color(display-p3 0 0 0 / 0.08),
+      0 3px 12px -4px color(display-p3 0 0 0 / 0.08),
+      0 4px 16px -8px color(display-p3 0 0 0 / 0.08), 0 0 0 1px color(display-p3 0 0 0 / 0.05);
+  }
+}

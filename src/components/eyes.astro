@@ -1,0 +1,127 @@
+---
+import { columns, neighbors, pickDirection, type Direction } from '../lib/gaze';
+
+const count = 16;
+
+// filled in order, so each eye weighs the row and column neighbors already placed
+const eyes: Direction[] = [];
+for (let i = 0; i < count; i++) {
+  eyes.push(pickDirection(neighbors(eyes, i)));
+}
+---
+
+<div class="wrapper">
+  <div class="grid" style={`--columns: ${columns}`}>
+    {eyes.map((direction) => (
+      <div class={`eye ${direction}`}>
+        <div class="iris">
+          <div class="pupil" />
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  import { directions, neighbors, pickDirection } from '../lib/gaze';
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+
+  const eyes = [...document.querySelectorAll<HTMLElement>('.eye')];
+  const directionOf = (eye: HTMLElement) =>
+    directions.find((direction) => eye.classList.contains(direction))!;
+
+  const interval = 2000;
+  let last = 0;
+  let previous = -1;
+
+  // every 2 seconds one random eye looks somewhere new, weighed against its row and column
+  function tick(now: number) {
+    if (now - last >= interval) {
+      last = now;
+
+      if (!reducedMotion.matches) {
+        // pick from every eye but the one that just moved, so none goes twice in a row
+        let index: number;
+        do index = Math.floor(Math.random() * eyes.length);
+        while (index === previous);
+        previous = index;
+
+        const current = directionOf(eyes[index]);
+        const around = neighbors(eyes, index).map(directionOf);
+        eyes[index].classList.replace(current, pickDirection(around, current));
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+</script>
+
+<style>
+  .wrapper {
+    background-color: #000;
+    padding: 96px;
+    overflow: hidden;
+  }
+
+  .grid {
+    background-color: #000;
+    place-items: center;
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+
+    gap: 60px;
+    margin-inline: auto;
+    max-inline-size: 540px;
+  }
+
+  .eye {
+    background-color: #f7efd6;
+    border-radius: 100%;
+    aspect-ratio: 67 / 80;
+    inline-size: 100%;
+    position: relative;
+  }
+
+  .iris {
+    background-color: #000;
+    border-radius: 100%;
+    aspect-ratio: 44 / 53;
+    inline-size: 100%;
+    /* centered in the eye; the direction offsets below are % of the iris's own size */
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    position: absolute;
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    translate: -50% -50%;
+
+    .top & {
+      transform: translateY(-25%);
+    }
+
+    .bottom & {
+      transform: translateY(25%);
+    }
+
+    .right & {
+      transform: translateX(25%);
+    }
+
+    .left & {
+      transform: translateX(-25%);
+    }
+  }
+
+  .pupil {
+    aspect-ratio: 16 / 25;
+    background-color: #f7efd6;
+    border-radius: 100%;
+    inline-size: 18%;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    translate: -50% -50%;
+  }
+</style>

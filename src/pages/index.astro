@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/hero.astro';
+import Eyes from '../components/eyes.astro';
+import Badge from '../components/badge.astro';
+import tempest from '../assets/images/tempest.svg';
+import koala from '../assets/images/koala.svg';
+import theory from '../assets/images/theory.svg';
+import flyingHippo from '../assets/images/flying-hippo.png';
+---
+
+<Layout title="David Woolf — Design engineer">
+  <Hero />
+
+  <section class="work-history">
+    <Badge title="Tempest" subtitle="Feb 2024 – June 2026" image={tempest} rotation="-8deg" />
+    <Badge title="Koala" subtitle="Feb 2022 – Dec 2023" image={koala} rotation="6deg" />
+    <Badge title="Theory" subtitle="Aug 2020 – Feb 2022" image={theory} rotation="-7deg" />
+    <Badge
+      title="Flying Hippo"
+      subtitle="Nov 2013 – Aug 2020"
+      image={flyingHippo}
+      rotation="7deg"
+    />
+  </section>
+
+  <section>
+    <Eyes />
+  </section>
+</Layout>
+
+<style>
+  .work-history {
+    display: flex;
+    justify-content: center;
+    padding-block: 48px 96px;
+  }
+</style>

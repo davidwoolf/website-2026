@@ -1,0 +1,11 @@
+@import './styles/reset.css';
+@import './styles/colors.css';
+@import './styles/typography.css';
+@import './styles/sizes.css';
+@import './styles/animations.css';
+@import './styles/layout.css';
+
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}

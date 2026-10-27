@@ -1,0 +1,16 @@
+:root {
+  /* --font-sans (Noto Sans) is defined by the `fonts` config in astro.config.mjs */
+  --font-weight-4: 400;
+  --font-weight-5: 500;
+  --font-weight-6: 600;
+  --font-weight-7: 700;
+
+  --letterspacing-1: -0.05em;
+  --letterspacing-2: -0.025em;
+
+  --lineheight-1: 115%;
+  --lineheight-2: 125%;
+  --lineheight-3: 135%;
+  --lineheight-4: 145%;
+  --lineheight-5: 155%;
+}
